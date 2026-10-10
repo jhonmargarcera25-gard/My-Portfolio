@@ -1,0 +1,2868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Jhon Mar Garcera | Jhon Mar Garcera</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        :root {
+            --bg-color: #0b0e14;
+            --text-color: #e0e0e0;
+            --accent-color: #007bff;
+            --card-bg: rgba(22, 27, 34, 0.70);
+            --nav-bg: rgba(13, 17, 23, 0.78);
+            --border-color: #30363d;
+            --particle-line: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f0f2f5;
+            --text-color: #1a1a1a;
+            --accent-color: #0056b3;
+            --card-bg: rgba(255, 255, 255, 0.80);
+            --nav-bg: rgba(255, 255, 255, 0.90);
+            --border-color: #d0d7de;
+            --particle-line: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background:
+                linear-gradient(
+                    rgba(3, 8, 30, 0.48),
+                    rgba(3, 8, 30, 0.72)
+                ),
+                url("spitcon-background.jpg")
+                center center / cover fixed no-repeat;
+
+            background-color: var(--bg-color);
+
+            color: var(--text-color);
+
+            transition: 0.3s;
+
+            line-height: 1.6;
+
+            overflow-x: hidden;
+        }
+
+        #particle-canvas {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            z-index: -1;
+
+            background: transparent;
+        }
+
+        .mono {
+            font-family: 'Courier New', Courier, monospace;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* =========================
+           NAVIGATION
+        ========================== */
+
+        nav {
+            position: fixed;
+
+            top: 0;
+
+            width: 100%;
+
+            min-height: 70px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 10px 5%;
+
+            background: var(--nav-bg);
+
+            border-bottom: 1px solid var(--border-color);
+
+            z-index: 1000;
+
+            backdrop-filter: blur(15px);
+        }
+
+        .nav-links {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            justify-content: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+
+            color: var(--text-color);
+
+            font-weight: 500;
+
+            font-size: 0.85rem;
+
+            padding: 5px 10px;
+
+            border-radius: 4px;
+
+            transition: 0.3s;
+
+            border: 1px solid transparent;
+        }
+
+        .nav-links a:hover {
+            border-color: var(--accent-color);
+
+            color: var(--accent-color);
+        }
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        header {
+            min-height: 100vh;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            align-items: center;
+
+            text-align: center;
+
+            padding: 100px 20px 20px 20px;
+
+            background: transparent;
+        }
+
+        .profile-card-top {
+            width: 150px;
+
+            height: 150px;
+
+            margin-bottom: 25px;
+
+            position: relative;
+
+            padding: 5px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--accent-color),
+                    transparent
+                );
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 20px
+                rgba(0, 123, 255, 0.3);
+
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .profile-card-top img {
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+
+            border: 4px solid var(--bg-color);
+        }
+
+        .hero-tag {
+            font-size: 1.8rem;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 10px;
+        }
+
+        #nameText {
+            font-family: 'Space Mono', monospace;
+
+            font-weight: 700;
+
+            color: var(--accent-color);
+
+            font-size: clamp(2rem, 4.5vw, 2.6rem);
+
+            letter-spacing: 3px;
+
+            text-shadow:
+                0 0 6px rgba(0,123,255,0.12),
+                0 0 18px rgba(0,123,255,0.06);
+
+            margin-bottom: 12px;
+        }
+
+        .card h4.mono {
+            font-size: 0.95rem !important;
+
+            line-height: 1.2;
+
+            margin-bottom: 8px;
+
+            display: -webkit-box;
+
+            -webkit-line-clamp: 2;
+
+            line-clamp: 2;
+
+            -webkit-box-orient: vertical;
+
+            overflow: hidden;
+        }
+
+        .card p {
+            font-size: 0.8rem !important;
+
+            color: var(--text-color);
+
+            opacity: 0.8;
+
+            margin-bottom: 15px;
+
+            line-height: 1.4;
+        }
+
+        .card .btn-outline {
+            font-size: 0.75rem !important;
+
+            padding: 6px 12px !important;
+        }
+
+        .card {
+            padding: 15px !important;
+        }
+
+        .status-badge {
+            position: absolute;
+
+            bottom: 10px;
+
+            right: 10px;
+
+            width: 20px;
+
+            height: 20px;
+
+            background: #28a745;
+
+            border: 3px solid var(--bg-color);
+
+            border-radius: 50%;
+
+            box-shadow: 0 0 10px #28a745;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        h1 {
+            font-size: clamp(1.6rem, 6.5vw, 3rem);
+
+            margin-bottom: 20px;
+
+            max-width: 900px;
+        }
+
+        .btn-group {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 15px;
+
+            justify-content: center;
+
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+
+            border-radius: 5px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+
+            border: 1px solid var(--accent-color);
+
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+
+            color: white;
+        }
+
+        .btn-outline {
+            color: var(--text-color);
+
+            background: rgba(0,0,0,0.1);
+        }
+
+        /* =========================
+           SECTIONS
+        ========================== */
+
+        section {
+            padding: 80px 5%;
+
+            max-width: 1200px;
+
+            margin: 0 auto;
+
+            position: relative;
+
+            background: transparent;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+
+            margin-bottom: 30px;
+
+            border-left: 5px solid var(--accent-color);
+
+            padding-left: 15px;
+        }
+
+        .grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(280px, 1fr)
+                );
+
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+
+            border: 1px solid var(--border-color);
+
+            padding: 25px;
+
+            border-radius: 8px;
+
+            transition: 0.3s;
+
+            backdrop-filter: blur(8px);
+        }
+
+        .card:hover {
+            border-color: var(--accent-color);
+
+            transform: translateY(-5px);
+        }
+
+        /* =========================
+           AI BUTTON
+        ========================== */
+
+        .ai-toggle {
+            position: fixed;
+
+            bottom: 20px;
+
+            right: 20px;
+
+            background: var(--accent-color);
+
+            color: white;
+
+            width: 55px;
+
+            height: 55px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            cursor: pointer;
+
+            z-index: 1001;
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,0.3);
+
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0% {
+                transform: scale(1);
+
+                box-shadow:
+                    0 0 0 0
+                    rgba(0, 123, 255, 0.7);
+            }
+
+            70% {
+                transform: scale(1.05);
+
+                box-shadow:
+                    0 0 0 10px
+                    rgba(0, 123, 255, 0);
+            }
+
+            100% {
+                transform: scale(1);
+
+                box-shadow:
+                    0 0 0 0
+                    rgba(0, 123, 255, 0);
+            }
+        }
+
+        /* =========================
+           VIDEO BACKGROUND
+        ========================== */
+
+        #bg-video {
+            position: fixed;
+
+            right: 0;
+
+            bottom: 0;
+
+            min-width: 100%;
+
+            min-height: 100%;
+
+            z-index: -2;
+        }
+
+        /* =========================
+           ALBUM BUTTON
+        ========================== */
+
+        .album-toggle {
+            position: fixed;
+
+            bottom: 90px;
+
+            right: 20px;
+
+            width: 55px;
+
+            height: 55px;
+
+            background: var(--accent-color);
+
+            color: white;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            cursor: pointer;
+
+            z-index: 1001;
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,0.3);
+
+            font-size: 20px;
+
+            transition: 0.3s;
+        }
+
+        .album-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* =========================
+           AI CHAT
+        ========================== */
+
+        .ai-chat {
+            position: fixed;
+
+            bottom: 85px;
+
+            right: 20px;
+
+            width: 320px;
+
+            background: var(--card-bg);
+
+            border: 1px solid var(--border-color);
+
+            border-radius: 12px;
+
+            z-index: 1000;
+
+            display: none;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.5);
+
+            flex-direction: column;
+
+            backdrop-filter: blur(15px);
+        }
+
+        .ai-header {
+            background: var(--accent-color);
+
+            color: white;
+
+            padding: 12px;
+
+            font-weight: bold;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+        #aiMessages {
+            height: 300px;
+
+            overflow-y: auto;
+
+            padding: 15px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+        }
+
+        .ai-input-area {
+            padding: 10px;
+
+            border-top: 1px solid var(--border-color);
+
+            display: flex;
+
+            gap: 8px;
+
+            background: var(--nav-bg);
+        }
+
+        .ai-input-area input {
+            flex: 1;
+
+            background: var(--bg-color);
+
+            border: 1px solid var(--border-color);
+
+            color: var(--text-color);
+
+            padding: 8px 12px;
+
+            border-radius: 20px;
+
+            outline: none;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            border-top: 1px solid var(--border-color);
+
+            padding: 50px 5%;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(200px, 1fr)
+                );
+
+            gap: 30px;
+
+            margin-top: 50px;
+
+            background: var(--nav-bg);
+        }
+
+        .footer-col h4 {
+            margin-bottom: 15px;
+
+            color: var(--accent-color);
+
+            font-size: 0.8rem;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 8px;
+
+            font-size: 0.85rem;
+        }
+
+        .footer-col a {
+            color: inherit;
+
+            text-decoration: none;
+
+            transition: 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-col i {
+            width: 20px;
+
+            color: var(--accent-color);
+        }
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 768px) {
+
+            nav {
+                flex-direction: column;
+
+                padding: 15px;
+
+                height: auto;
+            }
+
+            .nav-links {
+                margin-top: 10px;
+            }
+
+            .ai-chat {
+                width: 90%;
+
+                right: 5%;
+
+                left: 5%;
+            }
+        }
+
+        /* =========================
+           LIGHTBOX
+        ========================== */
+
+        .clickable-media {
+            cursor: pointer;
+        }
+
+        .lightbox-overlay {
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0,0,0,0.85);
+
+            display: none;
+
+            z-index: 2000;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+        }
+
+        .lightbox-content {
+            position: relative;
+
+            max-width: 95%;
+
+            max-height: 95%;
+        }
+
+        .lightbox-content img,
+        .lightbox-content iframe {
+            border-radius: 8px;
+
+            display: block;
+        }
+
+        .lightbox-close {
+            position: absolute;
+
+            top: -10px;
+
+            right: -10px;
+
+            background: var(--accent-color);
+
+            color: #fff;
+
+            border: none;
+
+            width: 36px;
+
+            height: 36px;
+
+            border-radius: 50%;
+
+            font-size: 20px;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 6px 18px rgba(0,0,0,0.4);
+        }
+
+    </style>
+</head>
+
+<body data-theme="dark">
+
+    <!--
+        IMPORTANT:
+        Keep spitcon-background.jpg
+        in the same folder as this index.html.
+    -->
+
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+
+    <nav>
+
+        <div class="mono hero-tag">
+            Jhon Mar Garcera
+        </div>
+
+        <audio controls>
+            <source src="music.mp4" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+
+        <div class="nav-links">
+
+            <a href="#home">Home</a>
+
+            <a href="#about">About</a>
+
+            <a href="#projects">Projects</a>
+
+            <a href="#skills">Skills</a>
+
+            <a href="#contact">Contact</a>
+
+            <button
+                onclick="toggleTheme()"
+                style="
+                    background:none;
+                    border:none;
+                    color:var(--text-color);
+                    cursor:pointer;
+                "
+            >
+                <i class="fas fa-adjust"></i>
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         HOME
+    ========================== -->
+
+    <header id="home">
+
+        <div class="profile-card-top">
+
+            <img
+                src="profile.jpg"
+                alt="Jhon Mar Garcera"
+            >
+
+            <div class="status-badge"></div>
+
+        </div>
+
+
+        <div
+            class="mono hero-tag"
+            id="nameText"
+        ></div>
+
+
+        <h1 id="animatedHeader">
+
+            <span id="text1"></span>
+
+            <br>
+
+            <span id="text2">
+                <i id="text2i"></i>
+            </span>
+
+        </h1>
+
+
+        <p id="liveText">
+            Student at CCDI Sorsogon |
+            Soon to be |
+            Prompt Engineer |
+            Full-Stack Developer
+        </p>
+
+
+        <div class="btn-group">
+
+            <a
+                href="#about"
+                class="btn btn-primary"
+            >
+                View site
+            </a>
+
+            <a
+                href="#contact"
+                class="btn btn-outline"
+            >
+                Let's talk
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         ABOUT
+    ========================== -->
+
+    <section id="about">
+
+        <h2 class="section-title">
+            About Me
+        </h2>
+
+        <div class="card">
+
+            <p>
+
+                Hailing from the coastal beauty of
+                Matnog, Sorsogon, I am Jhon Mar Garcera,
+                a Computer Science student at CCDI Sorsogon
+                with a vision that extends far beyond the horizon.
+
+                My journey in tech is driven by a deep-seated
+                curiosity about how the digital world functions—
+                not just on the surface, but from the very first
+                line of back-end logic to the final pixel of the
+                front-end interface.
+
+                As an aspiring Full Stack Developer,
+                I view coding as more than just a technical skill;
+                it is a medium for problem-solving and a gateway
+                to building impactful digital solutions.
+
+                <br><br>
+
+                Being a student at CCDI has provided me with
+                a rigorous foundation, but my ambition pushes
+                me to constantly explore the ever-evolving
+                landscape of modern frameworks and architectures.
+
+                I am dedicated to bridging the gap between
+                functional server-side stability and intuitive,
+                user-centric design.
+
+                Whether I'm architecting databases or refining
+                UI components, my goal remains the same:
+                to create seamless, end-to-end web experiences
+                that empower users and push the boundaries
+                of what's possible in the Bicol region's
+                growing tech scene and beyond.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ACCOMPLISHMENTS
+    ========================== -->
+
+    <section id="album">
+
+        <h2 class="section-title">
+            Accomplishments
+        </h2>
+
+        <div class="grid">
+
+
+            <div class="card">
+
+                <img
+                    src="pic1.jpg"
+                    style="width:100%; border-radius:6px;"
+                >
+
+            </div>
+
+
+            <div class="card">
+
+                <img
+                    src="pic2.jpg"
+                    style="width:100%; border-radius:6px;"
+                >
+
+            </div>
+
+
+            <div class="card">
+
+                <img
+                    src="pic3.jpg"
+                    style="width:100%; border-radius:6px;"
+                >
+
+            </div>
+
+
+            <div class="card">
+
+                <img
+                    src="pic4.jpg"
+                    style="width:100%; border-radius:6px;"
+                >
+
+            </div>
+
+
+            <div class="card">
+
+                <img
+                    src="pic5.jpg"
+                    style="width:100%; border-radius:6px;"
+                >
+
+            </div>
+
+
+            <div class="card">
+
+                <img
+                    src="pic6.jpg"
+                    style="width:100%; border-radius:6px;"
+                >
+
+            </div>
+
+
+            <div class="card">
+
+                <object
+                    data="pic7.pdf"
+                    type="application/pdf"
+                    style="
+                        width:100%;
+                        height:200px;
+                        border-radius:6px;
+                        overflow:hidden;
+                        display:block;
+                    "
+                >
+
+                    <p>
+                        PDF cannot be displayed.
+                        <a
+                            href="pic7.pdf"
+                            target="_blank"
+                        >
+                            Open certificate
+                        </a>
+                    </p>
+
+                </object>
+
+            </div>
+
+
+            <div class="card">
+
+                <object
+                    data="pic8.pdf"
+                    type="application/pdf"
+                    style="
+                        width:100%;
+                        height:200px;
+                        border-radius:6px;
+                        overflow:hidden;
+                        display:block;
+                    "
+                >
+
+                    <p>
+                        PDF cannot be displayed.
+                        <a
+                            href="pic8.pdf"
+                            target="_blank"
+                        >
+                            Open certificate
+                        </a>
+                    </p>
+
+                </object>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PROJECTS
+    ========================== -->
+
+    <section id="projects">
+
+        <h2 class="section-title">
+            Projects
+        </h2>
+
+        <div class="grid">
+
+
+            <div class="card">
+
+                <h4 class="mono">
+                    OOP BSCS 2A
+                </h4>
+
+                <p>
+                    Object Oriented Programming
+                    activities and exercises.
+                </p>
+
+                <a
+                    href="https://github.com/jhonmargarcera00-gar/OOP-BSCS-2A"
+                    target="_blank"
+                    class="btn btn-outline"
+                >
+                    View Project
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <h4 class="mono">
+                    Garcera Font Color
+                </h4>
+
+                <p>
+                    Simple web project demonstrating
+                    font color manipulation.
+                </p>
+
+                <a
+                    href="https://github.com/jhonmargarcera00-gar/Garcera_FontColor"
+                    target="_blank"
+                    class="btn btn-outline"
+                >
+                    View Project
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <h4 class="mono">
+                    My Portfolio
+                </h4>
+
+                <p>
+                    Personal portfolio project repository.
+                </p>
+
+                <a
+                    href="https://github.com/jhonmargarcera00-gar/My-Portfolio"
+                    target="_blank"
+                    class="btn btn-outline"
+                >
+                    View Project
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <h4 class="mono">
+                    Website
+                </h4>
+
+                <p>
+                    Website development project.
+                </p>
+
+                <a
+                    href="https://github.com/jhonmargarcera00-gar/Website"
+                    target="_blank"
+                    class="btn btn-outline"
+                >
+                    View Project
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <h4 class="mono">
+                    GitHub Pages Portfolio
+                </h4>
+
+                <p>
+                    Deployed website using GitHub Pages.
+                </p>
+
+                <a
+                    href="https://github.com/jhonmargarcera00-gar/Jhonmargarcera-00gar.github.io"
+                    target="_blank"
+                    class="btn btn-outline"
+                >
+                    View Project
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <h4 class="mono">
+                    BSCS2A Hotties
+                </h4>
+
+                <p>
+                    Class related collaborative project.
+                </p>
+
+                <a
+                    href="https://jhonmargarcera00-gar.github.io/BSCS2A-HOTTIES/"
+                    target="_blank"
+                    class="btn btn-outline"
+                >
+                    View Project
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <h4 class="mono">
+                    CITEA Coolers
+                </h4>
+
+                <p>
+                    Group development project repository.
+                </p>
+
+                <a
+                    href="https://github.com/jhonmargarcera00-gar/CITEA-COOLERS"
+                    target="_blank"
+                    class="btn btn-outline"
+                >
+                    View Project
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <h4 class="mono">
+                    Finance
+                </h4>
+
+                <p>
+                    Finance related programming exercises.
+                </p>
+
+                <a
+                    href="https://github.com/jhonmargarcera00-gar/Finance"
+                    target="_blank"
+                    class="btn btn-outline"
+                >
+                    View Project
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <h4 class="mono">
+                    Prelim OOP Exam
+                </h4>
+
+                <p>
+                    Object Oriented Programming
+                    prelim exam project.
+                </p>
+
+                <a
+                    href="https://github.com/jhonmargarcera00-gar/Prelim_OOP_Exam"
+                    target="_blank"
+                    class="btn btn-outline"
+                >
+                    View Project
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <h4 class="mono">
+                    Garcera Calculator
+                </h4>
+
+                <p>
+                    Calculator program developed
+                    for programming practice.
+                </p>
+
+                <a
+                    href="https://github.com/jhonmargarcera00-gar/Garcera__Calculator"
+                    target="_blank"
+                    class="btn btn-outline"
+                >
+                    View Project
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <h4 class="mono">
+                    Prelim Garcera 555
+                </h4>
+
+                <p>
+                    Programming prelim activity project.
+                </p>
+
+                <a
+                    href="https://github.com/jhonmargarcera00-gar/Prelim_Garcera_555"
+                    target="_blank"
+                    class="btn btn-outline"
+                >
+                    View Project
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <h4 class="mono">
+                    My website
+                </h4>
+
+                <p>
+                    Personal website project.
+                </p>
+
+                <a
+                    href="https://jhonmargarcera00-gar.github.io/Website/"
+                    target="_blank"
+                    class="btn btn-outline"
+                >
+                    View Project
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SKILLS
+    ========================== -->
+
+    <section id="skills">
+
+        <h2 class="section-title">
+            Technical Skills
+        </h2>
+
+        <div class="grid">
+
+
+            <div class="card">
+
+                <h4 class="mono">
+                    <i class="fas fa-code"></i>
+                    Languages
+                </h4>
+
+                <p>
+                    C#, C++, Python, Html, Css, JavaScript
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h4 class="mono">
+                    <i class="fas fa-mobile-alt"></i>
+                    Android Studio
+                </h4>
+
+                <p>
+                    Application development environment,
+                    Game Development
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h4 class="mono">
+                    <i class="fas fa-mobile-alt"></i>
+                    Capcut
+                </h4>
+
+                <p>
+                    Capcut video editing software
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h4 class="mono">
+                    <i class="fas fa-mobile-alt"></i>
+                    Photoshop
+                </h4>
+
+                <p>
+                    Adobe Photoshop image editing software
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h4 class="mono">
+                    <i class="fas fa-brain"></i>
+                    AI Logic
+                </h4>
+
+                <p>
+                    Advanced Prompt Engineering
+                    & LLM Optimization
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer id="contact">
+
+        <div class="footer-col">
+
+            <h4>
+                My Social Ecosystem
+            </h4>
+
+            <ul>
+
+                <li>
+                    <a
+                        href="https://github.com/jhonmargarcera00-gar"
+                        target="_blank"
+                    >
+                        <i class="fab fa-github"></i>
+                        GitHub
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="https://www.facebook.com/jmgarcera25bkm"
+                        target="_blank"
+                    >
+                        <i class="fab fa-facebook"></i>
+                        Facebook
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="https://www.tiktok.com/@garcerajhonmar?_r=1&_t=ZS-94gM8rPPF2q"
+                        target="_blank"
+                    >
+                        <i class="fab fa-tiktok"></i>
+                        TikTok
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="https://www.instagram.com/j.h.n.m.r_gard?igsh=MWNlOTk1MDZjZThibw=="
+                        target="_blank"
+                    >
+                        <i class="fab fa-instagram"></i>
+                        Instagram
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="https://www.youtube.com/@JHONMAR-z4s"
+                        target="_blank"
+                    >
+                        <i class="fab fa-youtube"></i>
+                        YouTube
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="footer-col">
+
+            <h4>
+                Direct Contact
+            </h4>
+
+            <ul>
+
+                <li>
+
+                    <i class="fas fa-envelope"></i>
+
+                    <a
+                        href="mailto:jhonmargarcera00@gmail.com"
+                        style="
+                            text-decoration:none;
+                            color:inherit;
+                        "
+                    >
+                        Email
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <i class="fas fa-phone"></i>
+
+                    <a
+                        href="tel:+639649543318"
+                        style="
+                            text-decoration:none;
+                            color:inherit;
+                        "
+                    >
+                        Phone Number
+                    </a>
+
+                </li>
+
+
+                <li
+                    onclick="openMap()"
+                    style="cursor:pointer;"
+                >
+
+                    <i class="fas fa-map-marker-alt"></i>
+
+                    Matnog, Sorsogon
+
+                </li>
+
+
+                <!-- MAP -->
+
+                <div
+                    id="mapPopup"
+                    style="
+                        display:none;
+                        position:fixed;
+                        top:0;
+                        left:0;
+                        width:100%;
+                        height:100%;
+                        background:rgba(0,0,0,0.7);
+                        justify-content:center;
+                        align-items:center;
+                        z-index:2000;
+                    "
+                >
+
+                    <div
+                        style="
+                            width:90%;
+                            max-width:800px;
+                            background:white;
+                            padding:10px;
+                            border-radius:8px;
+                        "
+                    >
+
+                        <button
+                            onclick="closeMap()"
+                            style="float:right;"
+                        >
+                            Close
+                        </button>
+
+                        <iframe
+                            width="100%"
+                            height="400"
+                            style="border:0"
+                            loading="lazy"
+                            allowfullscreen
+                            src="https://maps.google.com/maps?q=Tabunan%20Matnog%20Sorsogon&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                        >
+                        </iframe>
+
+                    </div>
+
+                </div>
+
+
+                <li
+                    onclick="openSchoolMap()"
+                    style="cursor:pointer;"
+                >
+
+                    <i class="fas fa-university"></i>
+
+                    CCDI Sorsogon City
+
+                </li>
+
+
+                <!-- SCHOOL MAP -->
+
+                <div
+                    id="schoolMap"
+                    style="
+                        display:none;
+                        position:fixed;
+                        top:0;
+                        left:0;
+                        width:100%;
+                        height:100%;
+                        background:rgba(0,0,0,0.7);
+                        justify-content:center;
+                        align-items:center;
+                        z-index:2000;
+                    "
+                >
+
+                    <div
+                        style="
+                            width:90%;
+                            max-width:800px;
+                            background:white;
+                            padding:10px;
+                            border-radius:8px;
+                        "
+                    >
+
+                        <button
+                            onclick="closeSchoolMap()"
+                            style="float:right;"
+                        >
+                            Close
+                        </button>
+
+                        <iframe
+                            width="100%"
+                            height="400"
+                            style="border:0"
+                            loading="lazy"
+                            allowfullscreen
+                            src="https://maps.google.com/maps?q=CCDI%20Sorsogon%20City&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                        >
+                        </iframe>
+
+                    </div>
+
+                </div>
+
+            </ul>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================
+         ALBUM BUTTON
+    ========================== -->
+
+    <div
+        class="album-toggle"
+        onclick="scrollToAlbum()"
+    >
+        <i class="fas fa-images"></i>
+    </div>
+
+
+    <!-- =========================
+         AI BUTTON
+    ========================== -->
+
+    <div
+        class="ai-toggle"
+        onclick="toggleAI()"
+        id="botBtn"
+    >
+        <i class="fas fa-robot"></i>
+    </div>
+
+
+    <!-- =========================
+         AI CHAT
+    ========================== -->
+
+    <div
+        class="ai-chat"
+        id="aiChat"
+    >
+
+        <div class="ai-header">
+
+            <span>
+                <i class="fas fa-terminal"></i>
+                JMG_BOT
+            </span>
+
+            <i
+                class="fas fa-times"
+                onclick="toggleAI()"
+                style="cursor:pointer;"
+            ></i>
+
+        </div>
+
+
+        <div id="aiMessages"></div>
+
+
+        <div class="ai-input-area">
+
+            <input
+                type="text"
+                id="aiInput"
+                placeholder="Ask me something..."
+                onkeypress="handleKeyPress(event)"
+            >
+
+            <button
+                onclick="handleChat()"
+                style="
+                    background:none;
+                    border:none;
+                    color:var(--accent-color);
+                    cursor:pointer;
+                "
+            >
+                <i class="fas fa-paper-plane"></i>
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         LIGHTBOX
+    ========================== -->
+
+    <div
+        id="lightbox"
+        class="lightbox-overlay"
+        role="dialog"
+        aria-hidden="true"
+    >
+
+        <div class="lightbox-content">
+
+            <button
+                class="lightbox-close"
+                aria-label="Close"
+            >
+                &times;
+            </button>
+
+            <div id="lightbox-body"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        /* =========================
+           THEME
+        ========================== */
+
+        function toggleTheme() {
+
+            const body = document.body;
+
+            const current =
+                body.getAttribute('data-theme');
+
+            body.setAttribute(
+                'data-theme',
+                current === 'dark'
+                    ? 'light'
+                    : 'dark'
+            );
+        }
+
+
+        /* =========================
+           PARTICLES
+        ========================== */
+
+        const canvas =
+            document.getElementById(
+                'particle-canvas'
+            );
+
+        const ctx =
+            canvas.getContext('2d');
+
+        let particlesArray;
+
+        let mouse = {
+            x: null,
+            y: null,
+            radius: 100
+        };
+
+
+        window.addEventListener(
+            'mousemove',
+            (e) => {
+
+                mouse.x = e.x;
+
+                mouse.y = e.y;
+
+            }
+        );
+
+
+        window.addEventListener(
+            'resize',
+            () => {
+
+                canvas.width = innerWidth;
+
+                canvas.height = innerHeight;
+
+                init();
+
+            }
+        );
+
+
+        class Particle {
+
+            constructor(
+                x,
+                y,
+                dirX,
+                dirY,
+                size,
+                color
+            ) {
+
+                this.x = x;
+
+                this.y = y;
+
+                this.dirX = dirX;
+
+                this.dirY = dirY;
+
+                this.size = size;
+
+                this.color = color;
+
+            }
+
+
+            draw() {
+
+                ctx.beginPath();
+
+                ctx.arc(
+                    this.x,
+                    this.y,
+                    this.size,
+                    0,
+                    Math.PI * 2,
+                    false
+                );
+
+                ctx.fillStyle = this.color;
+
+                ctx.fill();
+
+            }
+
+
+            update() {
+
+                if (
+                    this.x > canvas.width ||
+                    this.x < 0
+                ) {
+
+                    this.dirX =
+                        -this.dirX;
+
+                }
+
+
+                if (
+                    this.y > canvas.height ||
+                    this.y < 0
+                ) {
+
+                    this.dirY =
+                        -this.dirY;
+
+                }
+
+
+                let dx =
+                    mouse.x - this.x;
+
+                let dy =
+                    mouse.y - this.y;
+
+                let distance =
+                    Math.sqrt(
+                        dx * dx +
+                        dy * dy
+                    );
+
+
+                if (
+                    distance <
+                    mouse.radius
+                ) {
+
+                    if (
+                        mouse.x < this.x &&
+                        this.x <
+                        canvas.width -
+                        this.size * 10
+                    ) {
+
+                        this.x += 2;
+
+                    }
+
+
+                    if (
+                        mouse.x > this.x &&
+                        this.x >
+                        this.size * 10
+                    ) {
+
+                        this.x -= 2;
+
+                    }
+
+
+                    if (
+                        mouse.y < this.y &&
+                        this.y <
+                        canvas.height -
+                        this.size * 10
+                    ) {
+
+                        this.y += 2;
+
+                    }
+
+
+                    if (
+                        mouse.y > this.y &&
+                        this.y >
+                        this.size * 10
+                    ) {
+
+                        this.y -= 2;
+
+                    }
+
+                }
+
+
+                this.x += this.dirX;
+
+                this.y += this.dirY;
+
+                this.draw();
+
+            }
+
+        }
+
+
+        function init() {
+
+            particlesArray = [];
+
+            let numParticles =
+                (canvas.height *
+                 canvas.width) /
+                9000;
+
+
+            const colors = [
+                '#ff4d4d',
+                '#ffcc00',
+                '#007bff'
+            ];
+
+
+            for (
+                let i = 0;
+                i < numParticles;
+                i++
+            ) {
+
+                let size =
+                    Math.random() * 3 + 1;
+
+                let x =
+                    Math.random() *
+                    innerWidth;
+
+                let y =
+                    Math.random() *
+                    innerHeight;
+
+                let dirX =
+                    (Math.random() * 1) -
+                    0.5;
+
+                let dirY =
+                    (Math.random() * 1) -
+                    0.5;
+
+                let color =
+                    colors[
+                        Math.floor(
+                            Math.random() *
+                            colors.length
+                        )
+                    ];
+
+
+                particlesArray.push(
+                    new Particle(
+                        x,
+                        y,
+                        dirX,
+                        dirY,
+                        size,
+                        color
+                    )
+                );
+
+            }
+
+        }
+
+
+        function animate() {
+
+            ctx.clearRect(
+                0,
+                0,
+                innerWidth,
+                innerHeight
+            );
+
+
+            for (
+                let i = 0;
+                i < particlesArray.length;
+                i++
+            ) {
+
+                particlesArray[i].update();
+
+            }
+
+
+            connect();
+
+            requestAnimationFrame(
+                animate
+            );
+
+        }
+
+
+        function connect() {
+
+            let lineCol =
+                getComputedStyle(
+                    document.documentElement
+                ).getPropertyValue(
+                    '--particle-line'
+                );
+
+
+            for (
+                let a = 0;
+                a < particlesArray.length;
+                a++
+            ) {
+
+                for (
+                    let b = a;
+                    b < particlesArray.length;
+                    b++
+                ) {
+
+                    let dx =
+                        particlesArray[a].x -
+                        particlesArray[b].x;
+
+                    let dy =
+                        particlesArray[a].y -
+                        particlesArray[b].y;
+
+                    let dist =
+                        Math.sqrt(
+                            dx * dx +
+                            dy * dy
+                        );
+
+
+                    if (dist < 150) {
+
+                        let opacityValue =
+                            1 -
+                            (dist / 150);
+
+
+                        ctx.strokeStyle =
+                            lineCol.replace(
+                                '0.1',
+                                opacityValue * 0.2
+                            );
+
+
+                        ctx.lineWidth = 1;
+
+                        ctx.beginPath();
+
+                        ctx.moveTo(
+                            particlesArray[a].x,
+                            particlesArray[a].y
+                        );
+
+                        ctx.lineTo(
+                            particlesArray[b].x,
+                            particlesArray[b].y
+                        );
+
+                        ctx.stroke();
+
+                    }
+
+                }
+
+            }
+
+        }
+
+
+        canvas.width =
+            window.innerWidth;
+
+        canvas.height =
+            window.innerHeight;
+
+        init();
+
+        animate();
+
+
+        /* =========================
+           AI CHAT
+        ========================== */
+
+        const chatContainer =
+            document.getElementById(
+                'aiMessages'
+            );
+
+        const chatWindow =
+            document.getElementById(
+                'aiChat'
+            );
+
+
+        function toggleAI() {
+
+            const isHidden =
+                chatWindow.style.display ===
+                    'none' ||
+                chatWindow.style.display ===
+                    '';
+
+
+            chatWindow.style.display =
+                isHidden
+                    ? 'flex'
+                    : 'none';
+
+
+            if (
+                isHidden &&
+                chatContainer.innerHTML === ""
+            ) {
+
+                addMessage(
+                    "Greetings! I am Jhon's digital assistant. Want to know about his projects or coding skills?",
+                    'bot'
+                );
+
+            }
+
+        }
+
+
+        function handleKeyPress(e) {
+
+            if (
+                e.key === 'Enter'
+            ) {
+
+                handleChat();
+
+            }
+
+        }
+
+
+        function handleChat() {
+
+            const input =
+                document.getElementById(
+                    'aiInput'
+                );
+
+
+            const userText =
+                input.value.trim();
+
+
+            if (!userText) return;
+
+
+            addMessage(
+                userText,
+                'user'
+            );
+
+
+            input.value = "";
+
+
+            setTimeout(
+                () => {
+
+                    const query =
+                        userText.toLowerCase();
+
+
+                    let response =
+                        "I'm still learning! Try asking about Jhon's 'skills', 'education', or 'contact'.";
+
+
+                    if (
+                        query.includes(
+                            "skill"
+                        )
+                    ) {
+
+                        response =
+                            "Jhon is proficient in C#, C++, Python, and Web Dev. He's also a pro with Android Studio!";
+
+                    }
+
+                    else if (
+                        query.includes(
+                            "school"
+                        ) ||
+                        query.includes(
+                            "ccdi"
+                        )
+                    ) {
+
+                        response =
+                            "He is currently a student at CCDI (Computer Communication Development Institute) in Sorsogon City.";
+
+                    }
+
+                    else if (
+                        query.includes(
+                            "contact"
+                        )
+                    ) {
+
+                        response =
+                            "You can reach him via email at jhonmargarcera00@gmail.com or follow him on GitHub and TikTok!";
+
+                    }
+
+
+                    addMessage(
+                        response,
+                        'bot'
+                    );
+
+                },
+                600
+            );
+
+        }
+
+
+        /* =========================
+           LIVE TEXT
+        ========================== */
+
+        const texts = [
+
+            "Student at CCDI Sorsogon",
+
+            "Soon to be Prompt Engineer",
+
+            "Full-Stack Developer",
+
+            "AI Enthusiast"
+
+        ];
+
+
+        let count = 0;
+
+        let index = 0;
+
+        let currentText = "";
+
+        let letter = "";
+
+
+        (function type() {
+
+            if (
+                count === texts.length
+            ) {
+
+                count = 0;
+
+            }
+
+
+            currentText =
+                texts[count];
+
+
+            letter =
+                currentText.slice(
+                    0,
+                    ++index
+                );
+
+
+            document.getElementById(
+                "liveText"
+            ).textContent =
+                letter;
+
+
+            if (
+                letter.length ===
+                currentText.length
+            ) {
+
+                count++;
+
+                index = 0;
+
+                setTimeout(
+                    type,
+                    1500
+                );
+
+            }
+
+            else {
+
+                setTimeout(
+                    type,
+                    60
+                );
+
+            }
+
+        })();
+
+
+        /* =========================
+           MAP
+        ========================== */
+
+        function openMap() {
+
+            document.getElementById(
+                "mapPopup"
+            ).style.display = "flex";
+
+        }
+
+
+        function closeMap() {
+
+            document.getElementById(
+                "mapPopup"
+            ).style.display = "none";
+
+        }
+
+
+        function openSchoolMap() {
+
+            document.getElementById(
+                "schoolMap"
+            ).style.display = "flex";
+
+        }
+
+
+        function closeSchoolMap() {
+
+            document.getElementById(
+                "schoolMap"
+            ).style.display = "none";
+
+        }
+
+
+        /* =========================
+           ALBUM
+        ========================== */
+
+        function scrollToAlbum() {
+
+            document.getElementById(
+                "album"
+            ).scrollIntoView({
+                behavior: "smooth"
+            });
+
+        }
+
+
+        /* =========================
+           AI MESSAGES
+        ========================== */
+
+        function addMessage(
+            text,
+            sender
+        ) {
+
+            const msgDiv =
+                document.createElement(
+                    'div'
+                );
+
+
+            msgDiv.style.padding =
+                "10px 14px";
+
+
+            msgDiv.style.borderRadius =
+                "12px";
+
+
+            msgDiv.style.fontSize =
+                "0.85rem";
+
+
+            msgDiv.style.maxWidth =
+                "85%";
+
+
+            msgDiv.style.marginBottom =
+                "5px";
+
+
+            if (
+                sender === 'user'
+            ) {
+
+                msgDiv.style.alignSelf =
+                    "flex-end";
+
+
+                msgDiv.style.background =
+                    "var(--border-color)";
+
+
+                msgDiv.style.color =
+                    "var(--text-color)";
+
+
+                msgDiv.innerText =
+                    text;
+
+            }
+
+            else {
+
+                msgDiv.style.alignSelf =
+                    "flex-start";
+
+
+                msgDiv.style.background =
+                    "var(--accent-color)";
+
+
+                msgDiv.style.color =
+                    "white";
+
+
+                msgDiv.innerHTML =
+                    `<b>Bot:</b> ${text}`;
+
+            }
+
+
+            chatContainer.appendChild(
+                msgDiv
+            );
+
+
+            chatContainer.scrollTop =
+                chatContainer.scrollHeight;
+
+        }
+
+    </script>
+
+
+    <!-- =========================
+         HERO HEADER ANIMATION
+    ========================== -->
+
+    <script>
+
+        (function() {
+
+            const line1 =
+                "Bridging Human Intent";
+
+            const line2 =
+                "with Machine Execution";
+
+
+            const e1 =
+                document.getElementById(
+                    'text1'
+                );
+
+
+            const e2 =
+                document.getElementById(
+                    'text2i'
+                );
+
+
+            let stage = 0;
+
+            let i1 = 0;
+
+            let i2 = 0;
+
+
+            function step() {
+
+                if (
+                    stage === 0
+                ) {
+
+                    e1.textContent =
+                        line1.substring(
+                            0,
+                            ++i1
+                        );
+
+
+                    if (
+                        i1 > line1.length
+                    ) {
+
+                        stage = 1;
+
+                        setTimeout(
+                            step,
+                            900
+                        );
+
+                        return;
+
+                    }
+
+                }
+
+
+                else if (
+                    stage === 1
+                ) {
+
+                    e2.textContent =
+                        line2.substring(
+                            0,
+                            ++i2
+                        );
+
+
+                    if (
+                        i2 > line2.length
+                    ) {
+
+                        stage = 2;
+
+                        setTimeout(
+                            step,
+                            1100
+                        );
+
+                        return;
+
+                    }
+
+                }
+
+
+                else if (
+                    stage === 2
+                ) {
+
+                    e2.textContent =
+                        line2.substring(
+                            0,
+                            --i2
+                        );
+
+
+                    if (
+                        i2 < 0
+                    ) {
+
+                        stage = 3;
+
+                        setTimeout(
+                            step,
+                            500
+                        );
+
+                        return;
+
+                    }
+
+                }
+
+
+                else if (
+                    stage === 3
+                ) {
+
+                    e1.textContent =
+                        line1.substring(
+                            0,
+                            --i1
+                        );
+
+
+                    if (
+                        i1 < 0
+                    ) {
+
+                        i1 = 0;
+
+                        i2 = 0;
+
+                        stage = 0;
+
+                        setTimeout(
+                            step,
+                            600
+                        );
+
+                        return;
+
+                    }
+
+                }
+
+
+                setTimeout(
+                    step,
+                    300
+                );
+
+            }
+
+
+            setTimeout(
+                step,
+                500
+            );
+
+        })();
+
+    </script>
+
+
+    <!-- =========================
+         NAME ANIMATION
+    ========================== -->
+
+    <script>
+
+        (function() {
+
+            const word =
+                "JHON MAR GARCERA";
+
+
+            const el =
+                document.getElementById(
+                    'nameText'
+                );
+
+
+            if (!el) return;
+
+
+            let index = 0;
+
+            let removing = false;
+
+
+            function animateText() {
+
+                if (!removing) {
+
+                    el.textContent =
+                        word.substring(
+                            0,
+                            index
+                        );
+
+
+                    index++;
+
+
+                    if (
+                        index > word.length
+                    ) {
+
+                        removing = true;
+
+                        setTimeout(
+                            animateText,
+                            1200
+                        );
+
+                        return;
+
+                    }
+
+                }
+
+                else {
+
+                    el.textContent =
+                        word.substring(
+                            0,
+                            index
+                        );
+
+
+                    index--;
+
+
+                    if (
+                        index < 0
+                    ) {
+
+                        index = 0;
+
+                        removing = false;
+
+                        setTimeout(
+                            animateText,
+                            500
+                        );
+
+                        return;
+
+                    }
+
+                }
+
+
+                setTimeout(
+                    animateText,
+                    250
+                );
+
+            }
+
+
+            setTimeout(
+                animateText,
+                400
+            );
+
+        })();
+
+    </script>
+
+</body>
+</html>
